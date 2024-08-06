@@ -284,6 +284,7 @@ class Exp_Informer(Exp_Basic):
             )
             preds.append(pred.detach().cpu().numpy())
 
+        preds = pred_data.inverse_transform(preds)
         preds = np.array(preds)
         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
 
@@ -294,7 +295,7 @@ class Exp_Informer(Exp_Basic):
 
         np.save(folder_path + "real_prediction.npy", preds)
 
-        return pred_data
+        return
 
     def _process_one_batch(
         self, dataset_object, batch_x, batch_y, batch_x_mark, batch_y_mark
